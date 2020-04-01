@@ -1,6 +1,7 @@
 package module2
 
 import (
+	"fmt"
 	"testing"
 	"time"
 )
@@ -66,9 +67,12 @@ func TestRemoveItem(t *testing.T) {
 
 func TestCreateValidBudgetAddsToReport(t *testing.T) {
 	setup()
+	fmt.Println("report before ", report[time.January])
 	before := len(report)
 	_, err := CreateBudget(time.January, 1000)
+	fmt.Println("err of test ", err)
 	after := len(report)
+	fmt.Println("before and after ", before, " ", after)
 	if before == after || err != nil {
 		t.Error("Did not create a valid budget")
 	}

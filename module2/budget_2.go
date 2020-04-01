@@ -2,6 +2,7 @@ package module2
 
 import (
 	"errors"
+	"fmt"
 	"time"
 )
 
@@ -74,15 +75,16 @@ func (b *Budget) RemoveItem(description string) {
 // CreateBudget creates a new budget with a specified max
 func CreateBudget(month time.Month, max float32) (*Budget, error) {
 	var newBudget *Budget
-	newBudget1 := Budget{Max: max}
-	newBudget = &newBudget1
-	report[month] = newBudget
 	if len(report) >= 12 {
 		return nil, errReportIsFull
 	}
 	if _, hasEntry := report[month]; hasEntry {
 		return nil, errDuplicateEntry
 	}
+	newBudget1 := Budget{Max: max}
+	newBudget = &newBudget1
+	report[month] = newBudget
+	fmt.Println("report and month", report[month], month)
 
 	return newBudget, nil
 }
